@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bike Network Information</title>
+    <!-- Agrega los enlaces a los archivos CSS de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Network Information</h1>
+
+        {% if bike_network %}
+        <p>NAME:  {{ bike_network.name }}</p>
+        <p>ID: {{ bike_network.network_id }}</p>
+        <p>GBFS Href: {{ bike_network.gbfs_href }}</p>
+        <p>Href: {{ bike_network.href }}</p>
+
+        <h3>Company</h3>
+        <ul>
+            {% for company in bike_network.company %}
+            <li>{{ company }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Location</h3>
+        <p>City: {{ bike_network.location.city }}</p>
+        <p>Country: {{ bike_network.location.country }}</p>
+        <p>Latitude: {{ bike_network.location.latitude }}</p>
+        <p>Longitude: {{ bike_network.location.longitude }}</p>
+
+        <h3>Stations</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Empty Slots</th>
+                    <th>Free Bikes</th>
+                    <th>Total Docks</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th>Status</th>
+                    <th>Extra</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for station in bike_network.stations %}
+                <tr>
+                    <td>{{ station.name }}</td>
+                    <td>{{ station.empty_slots }}</td>
+                    <td>{{ station.free_bikes }}</td>
+                    <td>{{ station.extra.total_docks }}</td>
+                    <td>{{ station.latitude }}</td>
+                    <td>{{ station.longitude }}</td>
+                    <td>{{ station.status }}</td>
+                    <td>{{ station.extra }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No bike network information available.</p>
+        {% endif %}
+
+    </div>
+
+    <!-- Agrega los enlaces a los archivos JavaScript de Bootstrap y jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+</html>
